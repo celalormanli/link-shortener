@@ -15,8 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from link.views import LinkViewSet, LinkRedirectViewSet
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("link/", LinkViewSet.as_view({"get": "list", "post": "create"})),
+    path("<str:shorted_link>/", LinkRedirectViewSet.as_view()),
 ]
