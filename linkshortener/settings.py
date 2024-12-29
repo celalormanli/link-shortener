@@ -133,5 +133,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework_api_key.permissions.HasAPIKey",
-    ]
+    ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "link.throttling.CreateShortLinkThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "create_short_link" : "50/day",
+    }, 
 }

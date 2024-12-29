@@ -7,11 +7,13 @@ from django.http import HttpResponsePermanentRedirect
 from django.db.models import F
 
 from link.models import Link
+from link.throttling import CreateShortLinkThrottle
 from link.serializers import LinkSerializer
 import uuid
 
 class LinkViewSet(viewsets.ViewSet):
     permission_classes = [HasAPIKey]
+    throttle_classes = [CreateShortLinkThrottle]
 
     def create(self, request):
         serializer = LinkSerializer(data=request.data)
@@ -33,7 +35,7 @@ class LinkViewSet(viewsets.ViewSet):
 
 class LinkRedirectViewSet(APIView):
     permission_classes = []
-
+    
     def get(self, request, *args, **kwargs):
         link = Link.objects.filter(shorted_link=kwargs["shorted_link"]).first()
         Link.objects.filter(shorted_link=kwargs["shorted_link"]).update(redirect_counter=F("redirect_counter") + 1)
