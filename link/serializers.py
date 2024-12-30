@@ -4,6 +4,6 @@ from link.models import Link
 class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
-        fields = "__all__"
-        read_only_fields = ("shorted_link", "redirect_counter", "api_key")
+        fields = ("main_link", "shorted_link", "redirect_counter")
+        read_only_fields = ("shorted_link", "redirect_counter")
 
