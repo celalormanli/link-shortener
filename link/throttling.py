@@ -1,6 +1,7 @@
 from rest_framework.throttling import UserRateThrottle
 from rest_framework_api_key.models import APIKey
 
+
 class CreateShortLinkThrottle(UserRateThrottle):
     scope = "create_short_link"
 
@@ -12,9 +13,8 @@ class CreateShortLinkThrottle(UserRateThrottle):
             "scope": self.scope,
             "ident": ident
         }
-    
+
     def allow_request(self, request, view):
         if request.method == "POST":
             return super().allow_request(request, view)
         return True
-        

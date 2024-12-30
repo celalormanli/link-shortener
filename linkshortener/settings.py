@@ -138,8 +138,8 @@ REST_FRAMEWORK = {
         "link.throttling.CreateShortLinkThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "create_short_link" : "50/day",
-    }, 
+        "create_short_link": "50/day",
+    },
 }
 
 CACHES = {

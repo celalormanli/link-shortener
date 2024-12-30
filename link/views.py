@@ -55,6 +55,5 @@ class LinkRedirectViewSet(APIView):
             cache.set(kwargs["shorted_link"], main_link, timeout=CACHE_TTL)
         Link.objects.filter(shorted_link=kwargs["shorted_link"]).update(
             redirect_counter=F("redirect_counter") + 1)
-        
+
         return HttpResponsePermanentRedirect(main_link)
-        
